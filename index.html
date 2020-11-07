@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>eCommerce Site </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="js/shoppingCart.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-6" id="purchaseItems">
+                    <h1>Purchase Items</h1>
+                    <div id="item1">
+                        <p>Carton of Eggs</p>
+                        <p>$3.99</p>
+                        <input type="number" id="item1Qty" class="form-control" min="1" max="9" value="1">
+                        <button type="button" id="item1Buy" class="btn btn-primary">Buy</button>
+                    </div>
+                    <div id="item1">
+                        <p>Loaf of Bread</p>
+                        <p>$4.99</p>
+                        <input type="number" id="item2Qty" class="form-control" min="1" max="9" value="1">
+                        <button type="button" id="item2Buy" class="btn btn-primary">Buy</button>
+                    </div>
+                    <div id="item1">
+                        <p>Gallon of Milk</p>
+                        <p>$4.99</p>
+                        <input type="number" id="item3Qty" class="form-control" min="1" max="9" value="1">
+                        <button type="button" id="item3Buy" class="btn btn-primary">Buy</button>
+                    </div>
+                </div>
+                <div class="col-6" id="shoppingCart">
+                    <h1>Shopping Cart</h1>
+                    <table class="table" id="shoppingCartTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Cost Per Item</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
