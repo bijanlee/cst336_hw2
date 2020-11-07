@@ -3,9 +3,9 @@ $(document).ready(function(){
     
     //global variables
     var rowNumber = 1;
-    var item1Cost = 3.99;
-    var item2Cost = 4.99;
-    var item3Cost = 4.99;
+    var item1Cost = 39.99;
+    var item2Cost = 49.99;
+    var item3Cost = 49.99;
     var tax = 0.0725;
     
     //array for shopping cart items
@@ -13,17 +13,17 @@ $(document).ready(function(){
     
     $("#item1Buy").on("click", function() {
         var quantity = $("#item1Qty").val();
-        addItem("Carton of Eggs", 1, quantity);
+        addItem("Shoes", 1, quantity);
     })
     
     $("#item2Buy").on("click", function() {
         var quantity = $("#item2Qty").val();
-        addItem("Loaf of Bread", 2, quantity);
+        addItem("Sunglasses", 2, quantity);
     })
     
     $("#item3Buy").on("click", function() {
         var quantity = $("#item3Qty").val();
-        addItem("Gallon of Milk", 3, quantity);
+        addItem("Watch", 3, quantity);
     })
     
     
@@ -58,21 +58,26 @@ $(document).ready(function(){
         
             var itemCost = 0;
             var itemTotal = 0;
+            var imgSrc = "";
             //hardcoded values for now
             if(productNumber == 1){
                 itemCost = item1Cost;
                 itemTotal = item1Cost * quantityInt;
+                imgSrc += "shoes-sml.jpg";
             }else if(productNumber == 2) {
                 itemCost = item2Cost;
                 itemTotal = item2Cost * quantityInt;
+                imgSrc += "sunglasses-sml.jpg";
             }else if(productNumber == 3) {
                 itemCost = item3Cost;
                 itemTotal = item3Cost * quantityInt;
+                imgSrc += "watch-sml.jpg";
             }
             
             shoppingCartItem.itemTotal = itemTotal;
             
             var htmlToAppend = `<tr id="row${rowNumber}">`;
+            htmlToAppend += `<td><img src="img/${imgSrc}" class="img-fluid"></td>`;
             htmlToAppend += `<td>${productName}</td>`;
             htmlToAppend += `<td id="quantity${rowNumber}">${quantityInt}</td>`;
             htmlToAppend += `<td id="itemCost${rowNumber}">${itemCost}</td>`;
@@ -85,6 +90,11 @@ $(document).ready(function(){
             $("#shoppingCartTable").on('click', deleteId, function() {
                 removeItem(deleteId, productNumber);
             })
+            var priceId = `#price${productNumber}`;
+            $(priceId).removeClass('price').addClass('price-selected');
+            var buttonId = `#item${productNumber}Buy`;
+            $(buttonId).html("Buy More");
+            $(buttonId).removeClass('btn-primary').addClass('btn-success');
             rowNumber++;
             updateTotals();
         }else {
@@ -124,6 +134,11 @@ $(document).ready(function(){
         }
         rowNumber--;
         updateTotals();
+        var priceId = `#price${productId}`;
+        $(priceId).removeClass('price-selected').addClass('price');
+        var buttonId = `#item${productId}Buy`;
+        $(buttonId).html("Buy");
+        $(buttonId).removeClass('btn-success').addClass('btn-primary');
     }
     
     function updateTotals() {
