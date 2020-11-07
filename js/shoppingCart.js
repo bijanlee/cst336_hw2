@@ -6,6 +6,7 @@ $(document).ready(function(){
     var item1Cost = 3.99;
     var item2Cost = 4.99;
     var item3Cost = 4.99;
+    var tax = 0.0725;
     
     //array for shopping cart items
     var shoppingCartItems = [];
@@ -36,7 +37,8 @@ $(document).ready(function(){
         {
             "id" : productNumber,
             "productName": productName,
-            "quantity": quantityInt
+            "quantity": quantityInt,
+            "itemTotal": 0
         }
         
         var found = false;
@@ -68,6 +70,8 @@ $(document).ready(function(){
                 itemTotal = item3Cost * quantityInt;
             }
             
+            shoppingCartItem.itemTotal = itemTotal;
+            
             var htmlToAppend = `<tr id="row${rowNumber}">`;
             htmlToAppend += `<td>${productName}</td>`;
             htmlToAppend += `<td id="quantity${rowNumber}">${quantityInt}</td>`;
@@ -82,6 +86,7 @@ $(document).ready(function(){
                 removeItem(deleteId, productNumber);
             })
             rowNumber++;
+            updateTotals();
         }else {
             //update existing
             var quantityInt = shoppingCartItems[index].quantity;
@@ -98,10 +103,12 @@ $(document).ready(function(){
                 itemCost = item3Cost;
                 itemTotal = item3Cost * quantityInt;
             }
+            shoppingCartItems[index].itemTotal = itemTotal;
             var quantitySelector = `#quantity${index+1}`;
             var itemTotalSelector = `#itemTotal${index+1}`;
             $(quantitySelector).html(quantityInt);
             $(itemTotalSelector).html(itemTotal);
+            updateTotals();
         }
         
     }
@@ -116,6 +123,19 @@ $(document).ready(function(){
             }
         }
         rowNumber--;
+        updateTotals();
+    }
+    
+    function updateTotals() {
+        var subTotal = 0.00;
+        for(var i = 0; i < shoppingCartItems.length; i++) {
+            subTotal += shoppingCartItems[i].itemTotal;
+        }
+        var salesTax = subTotal * tax;
+        var total = subTotal + salesTax;
+        $("#subtotal").html(subTotal.toFixed(2));
+        $("#salesTax").html(salesTax.toFixed(2));
+        $("#total").html(total.toFixed(2));
     }
     
     //update item
