@@ -87,9 +87,12 @@ $(document).ready(function(){
             
             $('#shoppingCartTable tbody:last-child').append(htmlToAppend);
             var deleteId = `#row${rowNumber}`;
-            $("#shoppingCartTable").on('click', deleteId, function() {
+            var buttonId = `#delete${rowNumber}`;
+            $("#shoppingCartTable").on('click', buttonId, function() {
                 removeItem(deleteId, productNumber);
             })
+            
+            
             var priceId = `#price${productNumber}`;
             $(priceId).removeClass('price').addClass('price-selected');
             var buttonId = `#item${productNumber}Buy`;
